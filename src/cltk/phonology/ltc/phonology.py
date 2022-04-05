@@ -31,13 +31,11 @@ ph = Consonant(Place.bilabial, Manner.stop, False, "pʰ", aspirated=Aspirated.po
 b = Consonant(Place.bilabial, Manner.stop, True, "b")
 m = Consonant(Place.bilabial, Manner.nasal, False, "m")
 
-# Dentals
+# Alveolar stops, nasal, and lateral ##double-check Baxter against Pan and Zhang 2015, esp. place of articulation; nasal; lateral
 t = Consonant(Place.labio_dental, Manner.stop, False, "t")
 th = Consonant(Place.labio_dental, Manner.stop, False, "tʰ", aspirated=Aspirated.pos)
 d = Consonant(Place.alveolar, Manner.stop, True, "d")
 n = Consonant(Place.alveolar, Manner.nasal, False, "n")
-
-# Lateral
 l = Consonant(Place.dental, Manner.approximant, False, "l")
 
 # Retroflex stops
@@ -46,14 +44,14 @@ trh = Consonant(Place.retroflex, Manner.stop, False, "ʈʰ", aspirated=Aspirated
 dr = Consonant(Place.retroflex, Manner.stop, True, "ɖ")
 nr = Consonant(Place.retroflex, Manner.nasal, False, "ɳ")
 
-# Dental sibilants
+# Alveolar fricatives and affricatives ##double-check Baxter against Pan and Zhang 2015, esp. place of articulation; terms: sibilant vs. fricatives/affricatices
 ts = Consonant(Place.dental, Manner.affricate, False, "ts")
 tsh = Consonant(Place.dental, Manner.affricate, False, "tsʰ", aspirated=Aspirated.pos)
 dz = Consonant(Place.dental, Manner.affricate, True, "dz")
 s = Consonant(Place.dental, Manner.fricative, False, "s")
 z = Consonant(Place.dental, Manner.fricative, True, "z")
 
-# Retroflex sibilants
+# Retroflex fricatives and affricatives
 tsr = Consonant(Place.dental, Manner.affricate, False, "ʈʂ")
 tsrh = Consonant(Place.dental, Manner.affricate, False, "ʈʂʰ", aspirated=Aspirated.pos)
 dzr = Consonant(Place.dental, Manner.affricate, True, "ɖʐ")
@@ -67,7 +65,7 @@ dzy = Consonant(Place.palatal, Manner.affricate, True, "dʑ")
 ny = Consonant(Place.palatal, Manner.nasal, False, "ɲ")
 sy = Consonant(Place.palatal, Manner.fricative, False, "ɕ")
 zy = Consonant(Place.palatal, Manner.fricative, True, "ʑ")
-y = Consonant(Place.palatal, Manner.approximant, False, "y")
+y = Consonant(Place.palatal, Manner.approximant, False, "j")  #double-check Baxter's ASCII-friendly "y" against Pan and Zhang 2015: 85; IPA as "j" or "y"?
 
 # Velars
 k = Consonant(Place.velar, Manner.stop, False, "k")
@@ -77,8 +75,8 @@ ng = Consonant(Place.velar, Manner.nasal, False, "ŋ")
 
 # Laryngeals
 ʔ = Consonant(Place.glottal, Manner.stop, False, "ʔ")
-x = Consonant(Place.glottal, Manner.fricative, False, "x")
-h = Consonant(Place.glottal, Manner.fricative, True, "ɣ")
+x = Consonant(Place.glottal, Manner.fricative, False, "x") #double-check Baxter against Pan and Zhang 2015: 85; IPA as "x" or "h"?
+h = Consonant(Place.glottal, Manner.fricative, True, "ɣ") #double-check Baxter against Pan and Zhang 2015: 85; IPA as "h" or "ɦ"?
 
 CONSONANTS = set(
     [
@@ -121,7 +119,7 @@ CONSONANTS = set(
     ]
 )
 
-## Vowels
+## Vowels ###double-check Baxter's vowels against Pan and Zhang 2015: 88-89
 
 i = Vowel(Height.close, Backness.front, Roundedness.neg, Length.long, "i")
 ɨ = Vowel(Height.close, Backness.central, Roundedness.neg, Length.long, "ɨ")
@@ -133,6 +131,7 @@ ae = Vowel(Height.near_open, Backness.front, Roundedness.neg, Length.long, "æ")
 a = Vowel(Height.open, Backness.front, Roundedness.neg, Length.long, "a")
 
 ### Phonemes
+
 
 ## Initials
 
@@ -235,8 +234,13 @@ MIDDLE_CHINESE = INITIALS | FINALS
 ## Tones
 
 """
-Tone denotes the use of pitch in languages per syllable to distinguish lexical or grammatical meaning 
+Tones are suprasegmentals and denote the use of pitch in languages per syllable to distinguish lexical or grammatical meaning.
+For IPA notation, use Chao tone letters; see https://www.internationalphoneticassociation.org/content/ipa-tones-and-word-accents and https://en.wikipedia.org/wiki/Tone_letter#Chao_tone_letters_(IPA) 
 """
+
+## NOTE: need to create new class to implement tones, as underlying CLTK does not contain this feature
+#class Tone()
+
 
 """ Middle Chinese Tones 
 MC features four tones;  level (平 píng), rising (上 shǎng), departing (去 qù), and entering (入 rù). 

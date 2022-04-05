@@ -1,6 +1,7 @@
 """Middle Chinese phonology module. Sources:
 - https://en.wikipedia.org/wiki/Middle_Chinese#Phonology
 - A Handbook of Old Chinese Phonology by William H. Baxter (1992)
+- Wuyun Pan and Hongming Zhang, "Middle Chinese Phonology and Qieyun," in The Oxford Handbook of Chinese Linguistics, ed. by William S-Y. Wang and Chaofen Sun (Oxford: OUP, 2015), DOI: 10.1093/oxfordhb/9780199856336.013.0016 
 
 """
 
@@ -230,3 +231,25 @@ CODAS = set()
 FINALS = set()
 
 MIDDLE_CHINESE = INITIALS | FINALS
+
+## Tones
+
+"""
+Tone denotes the use of pitch in languages per syllable to distinguish lexical or grammatical meaning 
+"""
+
+""" Middle Chinese Tones 
+MC features four tones;  level (平 píng), rising (上 shǎng), departing (去 qù), and entering (入 rù). 
+In Baxter 1992, level (平) is  unmarked; rising (上) marked by final X; departing (去) by H; and entering (入) unmarked but distinguishable from level through final -k/t/p
+"Little is known about the true value of the tones in Middle Chinese. ... their tonal values may be reconstructed as ˧33, ˧˥35, ˥˩51, ˧3ʔ, respectively" (Pan and Zhang 2015: 84) [Note that entering tone may end on any eligible final stop consonant, i.e. k/t/p]
+- For more, compare https://en.wikipedia.org/wiki/Four_tones_(Middle_Chinese)
+"""
+
+
+## Syllable structure
+
+"""
+MC syllables, expressed through individual Chinese characters, consist of the following:
+initial (I); medial (M); nucleus (N) [which consists of onglide (G) and vowel (V)]; and coda (C) or ending (E); as well as tone (T)
+Any syllable can hence be represented as I(M)(G)V(C)T [optional material in parentheses]
+"""

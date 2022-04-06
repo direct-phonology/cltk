@@ -65,7 +65,7 @@ dzy = Consonant(Place.palatal, Manner.affricate, True, "dʑ")
 ny = Consonant(Place.palatal, Manner.nasal, False, "ɲ")
 sy = Consonant(Place.palatal, Manner.fricative, False, "ɕ")
 zy = Consonant(Place.palatal, Manner.fricative, True, "ʑ")
-y = Consonant(Place.palatal, Manner.approximant, False, "j")  #double-check Baxter's ASCII-friendly "y" against Pan and Zhang 2015: 85; IPA as "j" or "y"?
+y = Consonant(Place.palatal, Manner.approximant, False, "j")  #double-check Baxter's ASCII-friendly "y" against Pan and Zhang 2015: 85; IPA as "j" or "y"? ["j" as consonantal appears correct]
 
 # Velars
 k = Consonant(Place.velar, Manner.stop, False, "k")
@@ -121,14 +121,44 @@ CONSONANTS = set(
 
 ## Vowels ###double-check Baxter's vowels against Pan and Zhang 2015: 88-89
 
+#Nick's original proposal
 i = Vowel(Height.close, Backness.front, Roundedness.neg, Length.long, "i")
-ɨ = Vowel(Height.close, Backness.central, Roundedness.neg, Length.long, "ɨ")
+ɨ = Vowel(Height.close, Backness.central, Roundedness.neg, Length.long, "ɨ") #DOUBLE-CHECK: this does not occur in MC? or is this Baxter's "+"?
 u = Vowel(Height.close, Backness.back, Roundedness.neg, Length.long, "u")
 e = Vowel(Height.close_mid, Backness.front, Roundedness.neg, Length.long, "e")
 o = Vowel(Height.mid, Backness.back, Roundedness.neg, Length.long, "o")
 ea = Vowel(Height.open_mid, Backness.front, Roundedness.neg, Length.long, "ɛ")
 ae = Vowel(Height.near_open, Backness.front, Roundedness.neg, Length.long, "æ")
 a = Vowel(Height.open, Backness.front, Roundedness.neg, Length.long, "a")
+
+#Gian's notes  4/6/2022; based on Pan and Zhang 2015: 88-89
+##NOTE: Length appears not to be distinguished in MC, hence could be omitted here (if necessary for class Vowel, set as eigher long or short across all vowels)
+
+##may need BasePhonologicalRule to define vowel's acc. to Pan and Zhang 2015: 88-89; see esp. vowel chart and Table 6.4 on p. 88. Baxter's notation marks most of these (but "j" + "a" == "jɑ"). 
+##double-check whether to include BasePhonologicalRule to define palatal + "j" cases, like 車 "tsyh" + "jae" == "tsyhae" (in Baxter's notation) [dropped "j" in notation only?]
+
+VOWELS = set(
+    [
+        i,
+        ɨ,
+        u,
+        e,
+        o,
+        ea,
+        ae,
+        a,
+    ]
+)
+
+## Medials
+
+j = Consonant(Place.palatal, Manner.approximant, False, "j")
+w = Consonant(Place.velar, Manner.approximant, True, "w") #check if there is a way to specify labial-velar approximant
+#jwi =
+#wi = 
+#jw =
+#Note that Pan and Zhang 2015 represent medials as "ɤ", "ɣ", and "i"
+#NOTE: are there any jj/jjw? [there shouldn't be, I think]
 
 ### Phonemes
 
@@ -206,6 +236,7 @@ COMPLEX_INITIALS = set(
 INITIALS = SIMPLE_INITIALS | COMPLEX_INITIALS
 
 ## Codas
+#can consist of Zero coda, ng, m, n, j, or w
 
 # Zero coda
 ZERO_CODA = set(PositionedPhoneme(a, syllable_final=True), PositionedPhoneme())
@@ -220,12 +251,13 @@ ZERO_CODA = set(PositionedPhoneme(a, syllable_final=True), PositionedPhoneme())
 
 # Velar coda
 
-NUCLEI = set()
+NUCLEI = VOWELS
 
 CODAS = set()
 
 
 ## Finals
+##NOTE: Best to add traditional rhyme categories in notes when listing finals
 
 FINALS = set()
 

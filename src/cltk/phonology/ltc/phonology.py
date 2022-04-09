@@ -266,7 +266,7 @@ MIDDLE_CHINESE = INITIALS | FINALS
 ## Tones
 
 """
-Tones are suprasegmentals and denote the use of pitch in languages per syllable to distinguish lexical or grammatical meaning.
+Tones are fundamental frequency modulations with phonemic contrast. As suprasegmentals, they denote the use of pitch in languages per syllable to distinguish lexical or grammatical meaning.
 For IPA notation, use Chao tone letters; see https://www.internationalphoneticassociation.org/content/ipa-tones-and-word-accents and https://en.wikipedia.org/wiki/Tone_letter#Chao_tone_letters_(IPA) 
 """
 
@@ -280,6 +280,10 @@ In Baxter 1992, level (平) is  unmarked; rising (上) marked by final X; depart
 "Little is known about the true value of the tones in Middle Chinese. ... their tonal values may be reconstructed as ˧33, ˧˥35, ˥˩51, ˧3ʔ, respectively" (Pan and Zhang 2015: 84) [Note that entering tone may end on any eligible final stop consonant, i.e. k/t/p]
 - For more, compare https://en.wikipedia.org/wiki/Four_tones_(Middle_Chinese)
 """
+
+##Voice quality (occurring often as a secondary characteristic of tones; examples include creaky voice, breathy voice, etc.)
+###NOTE: Does not appear to occur in MC, but could be implemented as new class analogous to Tone for future work on dialects etc.
+
 
 
 ## Syllable structure

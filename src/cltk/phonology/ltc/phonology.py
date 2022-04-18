@@ -5,6 +5,10 @@
 
 """
 
+## GDR: add back to orthophonology.py:
+## labio-velars
+## tones
+
 from cltk.phonology.orthophonology import (
     Aspirated,
     Consonant,
@@ -31,12 +35,14 @@ ph = Consonant(Place.bilabial, Manner.stop, False, "pʰ", aspirated=Aspirated.po
 b = Consonant(Place.bilabial, Manner.stop, True, "b")
 m = Consonant(Place.bilabial, Manner.nasal, False, "m")
 
-# Alveolar stops, nasal, and lateral ##double-check Baxter against Pan and Zhang 2015, esp. place of articulation; nasal; lateral
+# Dentals/alveolar stops, nasal, and lateral
 t = Consonant(Place.labio_dental, Manner.stop, False, "t")
 th = Consonant(Place.labio_dental, Manner.stop, False, "tʰ", aspirated=Aspirated.pos)
 d = Consonant(Place.alveolar, Manner.stop, True, "d")
 n = Consonant(Place.alveolar, Manner.nasal, False, "n")
 l = Consonant(Place.dental, Manner.approximant, False, "l")
+## note: Baxter 1992: 49 classifies as dental, lists lateral separately; Pan and Zhang 2015: 85 group dentals ("t", "th", "d", "n") and lateral ("l") together as alveolar stops, nasal, and lateral
+## "It is unclear whether these should be regarded as dental or alveolar in articulation ..." (Baxter 1992: 49).
 
 # Retroflex stops
 tr = Consonant(Place.retroflex, Manner.stop, False, "ʈ")
@@ -44,14 +50,15 @@ trh = Consonant(Place.retroflex, Manner.stop, False, "ʈʰ", aspirated=Aspirated
 dr = Consonant(Place.retroflex, Manner.stop, True, "ɖ")
 nr = Consonant(Place.retroflex, Manner.nasal, False, "ɳ")
 
-# Alveolar fricatives and affricatives ##double-check Baxter against Pan and Zhang 2015, esp. place of articulation; terms: sibilant vs. fricatives/affricatices
+# dental/alveolar sibilants
 ts = Consonant(Place.dental, Manner.affricate, False, "ts")
 tsh = Consonant(Place.dental, Manner.affricate, False, "tsʰ", aspirated=Aspirated.pos)
 dz = Consonant(Place.dental, Manner.affricate, True, "dz")
 s = Consonant(Place.dental, Manner.fricative, False, "s")
 z = Consonant(Place.dental, Manner.fricative, True, "z")
+## note: Baxter 1992: 51 classifies as dental sibilants; Pan and Zhang 2015: 85 classify as alveolar fricatives and affricates
 
-# Retroflex fricatives and affricatives
+# Retroflex fricatives and affricates
 tsr = Consonant(Place.dental, Manner.affricate, False, "ʈʂ")
 tsrh = Consonant(Place.dental, Manner.affricate, False, "ʈʂʰ", aspirated=Aspirated.pos)
 dzr = Consonant(Place.dental, Manner.affricate, True, "ɖʐ")
@@ -65,18 +72,24 @@ dzy = Consonant(Place.palatal, Manner.affricate, True, "dʑ")
 ny = Consonant(Place.palatal, Manner.nasal, False, "ɲ")
 sy = Consonant(Place.palatal, Manner.fricative, False, "ɕ")
 zy = Consonant(Place.palatal, Manner.fricative, True, "ʑ")
-y = Consonant(Place.palatal, Manner.approximant, False, "j")  #double-check Baxter's ASCII-friendly "y" against Pan and Zhang 2015: 85; IPA as "j" or "y"? ["j" as consonantal appears correct]
+y = Consonant(Place.palatal, Manner.approximant, False, "j")
 
 # Velars
 k = Consonant(Place.velar, Manner.stop, False, "k")
 kh = Consonant(Place.velar, Manner.stop, False, "kʰ", aspirated=Aspirated.pos)
 g = Consonant(Place.velar, Manner.stop, True, "g")
-ng = Consonant(Place.velar, Manner.nasal, False, "ŋ")
+ng = Consonant(Place.velar, Manner.nasal, True, "ŋ")
+
+# Labiovelars
+# based on Baxter 1992: 62
+## NOTE: needs to be added back to orthophonology.py
+wk = Consonant(Place.labio_velar, Manner.stop, False, "kʷ")
+wng = Consonant(Place.labio_velar, Manner.nasal, True, "ŋʷ")
 
 # Laryngeals
 ʔ = Consonant(Place.glottal, Manner.stop, False, "ʔ")
-x = Consonant(Place.glottal, Manner.fricative, False, "x") #double-check Baxter against Pan and Zhang 2015: 85; IPA as "x" or "h"?
-h = Consonant(Place.glottal, Manner.fricative, True, "ɣ") #double-check Baxter against Pan and Zhang 2015: 85; IPA as "h" or "ɦ"?
+x = Consonant(Place.glottal, Manner.fricative, False, "x") ## note: may represent "x" or "h" due to dialect divergences (Baxter 1992: 58); Pan and Zhang 2015: 85 classify as "h"
+h = Consonant(Place.glottal, Manner.fricative, True, "ɣ") ## note: may represent "ɣ" or "ɦ" due to dialect divergences (Baxter 1992: 58); Pan and Zhang 2015: 85 classify as "ɦ"
 
 CONSONANTS = set(
     [
@@ -120,10 +133,8 @@ CONSONANTS = set(
 )
 
 ## Vowels ###double-check Baxter's vowels against Pan and Zhang 2015: 88-89
-
-#Nick's original proposal
 i = Vowel(Height.close, Backness.front, Roundedness.neg, Length.long, "i")
-ɨ = Vowel(Height.close, Backness.central, Roundedness.neg, Length.long, "ɨ") #DOUBLE-CHECK: this does not occur in MC? or is this Baxter's "+"?
+ɨ = Vowel(Height.close, Backness.central, Roundedness.neg, Length.long, "ɨ") ##note: Baxter 1992: 61 renders "ɨ" as "+" // this would cause issues
 u = Vowel(Height.close, Backness.back, Roundedness.neg, Length.long, "u")
 e = Vowel(Height.close_mid, Backness.front, Roundedness.neg, Length.long, "e")
 o = Vowel(Height.mid, Backness.back, Roundedness.neg, Length.long, "o")
@@ -131,11 +142,8 @@ ea = Vowel(Height.open_mid, Backness.front, Roundedness.neg, Length.long, "ɛ")
 ae = Vowel(Height.near_open, Backness.front, Roundedness.neg, Length.long, "æ")
 a = Vowel(Height.open, Backness.front, Roundedness.neg, Length.long, "a")
 
-#Gian's notes  4/6/2022; based on Pan and Zhang 2015: 88-89
-##NOTE: Length appears not to be distinguished in MC, hence could be omitted here (if necessary for class Vowel, set as eigher long or short across all vowels)
-
-##may need BasePhonologicalRule to define vowel's acc. to Pan and Zhang 2015: 88-89; see esp. vowel chart and Table 6.4 on p. 88. Baxter's notation marks most of these (but "j" + "a" == "jɑ"). 
-##double-check whether to include BasePhonologicalRule to define palatal + "j" cases, like 車 "tsyh" + "jae" == "tsyhae" (in Baxter's notation) [dropped "j" in notation only?]
+# Gian's notes  4/6/2022; based on Pan and Zhang 2015: 88-89
+## NOTE: Length appears not to be distinguished in MC, hence could be omitted here (if necessary for class Vowel, set as either long or short across all vowels)
 
 VOWELS = set(
     [
@@ -153,12 +161,37 @@ VOWELS = set(
 ## Medials
 
 j = Consonant(Place.palatal, Manner.approximant, False, "j")
-w = Consonant(Place.velar, Manner.approximant, True, "w") #check if there is a way to specify labial-velar approximant
-#jwi =
-#wi = 
-#jw =
+w = Consonant(Place.labio_velar, Manner.approximant, True, "w")
+
+
+
+## Chongniu 重紐 distinctions
+## "The chóngniǔ distinction  has been interpreted by some as a difference in the medial, by others asa difference in the main vowel; [Baxter's] notation is a compromise intended to represent the distinction graphically while leaving its phonological interpretation open" (Baxter 1992: 63).
+## "It is quite possible that both the medial solution and the main-vowel solution are correct, but for different dialects or different time periods" (Baxter 1992: 285).
+## "...[Baxter's notation] is merely a graphic device and should not be taken as a phonological interpretation" (Baxter 1992: 79).
+## For more, compare Baxter 1992: 75-81; 282-286.
+## Pan and Zhang 2015: 86-87 adopt the medial solution. 
+
 #Note that Pan and Zhang 2015 represent medials as "ɤ", "ɣ", and "i"
 #NOTE: are there any jj/jjw? [there shouldn't be, I think]
+
+## since chongniu-distinction is only a graphic device in Baxter --> same medials as above
+# division-IV chongniu (only division-IV uses both "j" and "i") // Type A
+#jwi = Consonant(Place.labio_velar, Manner.approximant, True, "w")
+#ji = Consonant(Place.palatal, Manner.approximant, False, "j")
+
+
+##may need BasePhonologicalRule to define medials & vowels acc. to Pan and Zhang 2015: 88-89; see esp. vowel chart and Table 6.4 on p. 88. Baxter's notation marks most of these (but "j" + "a" == "jɑ"). 
+
+##double-check whether to include BasePhonologicalRule to define palatal + "j" cases, like 車 "tsyh" + "jae" == "tsyhae" (in Baxter's notation) [dropped "j" in notation only?]
+
+MEDIALS = set(
+    [
+        j,
+        w,
+    ]
+)
+
 
 ### Phonemes
 

@@ -170,15 +170,14 @@ w = Consonant(Place.labio_velar, Manner.approximant, True, "w")
 ## "It is quite possible that both the medial solution and the main-vowel solution are correct, but for different dialects or different time periods" (Baxter 1992: 285).
 ## "...[Baxter's notation] is merely a graphic device and should not be taken as a phonological interpretation" (Baxter 1992: 79).
 ## For more, compare Baxter 1992: 75-81; 282-286.
-## Pan and Zhang 2015: 86-87 adopt the medial solution. 
+## Pan and Zhang 2015: 86-87 adopt the medial solution. Note that Pan and Zhang 2015 represent medials as "ɤ", "ɣ", and "i"
 
-#Note that Pan and Zhang 2015 represent medials as "ɤ", "ɣ", and "i"
-#NOTE: are there any jj/jjw? [there shouldn't be, I think]
+# division-IV chongniu (only division-IV uses both "j" and "i") // Type A
+#jwi = Consonant(Place.labio_velar, Manner.approximant, True, "w") >>>> NOTE: needs to be solved in transcriber
+#ji = Consonant(Place.palatal, Manner.approximant, False, "j")
 
 ## since chongniu-distinction is only a graphic device in Baxter --> same medials as above
-# division-IV chongniu (only division-IV uses both "j" and "i") // Type A
-#jwi = Consonant(Place.labio_velar, Manner.approximant, True, "w")
-#ji = Consonant(Place.palatal, Manner.approximant, False, "j")
+## alternative explanation of chongniu-4: slight fricative medial -ʑ- instead of simple -j- 
 
 
 ##may need BasePhonologicalRule to define medials & vowels acc. to Pan and Zhang 2015: 88-89; see esp. vowel chart and Table 6.4 on p. 88. Baxter's notation marks most of these (but "j" + "a" == "jɑ"). 

@@ -129,6 +129,9 @@ CONSONANTS = set(
         ʔ,
         x,
         h,
+        w,
+        j,
+        ji,
     ]
 )
 
@@ -159,6 +162,7 @@ VOWELS = set(
 )
 
 ## Medials
+### note: these could be classified as semivowels
 
 j = Consonant(Place.palatal, Manner.approximant, False, "j")
 w = Consonant(Place.labio_velar, Manner.approximant, True, "w")
@@ -173,23 +177,27 @@ w = Consonant(Place.labio_velar, Manner.approximant, True, "w")
 ## Pan and Zhang 2015: 86-87 adopt the medial solution. Note that Pan and Zhang 2015 represent medials as "ɤ", "ɣ", and "i"
 
 # division-IV chongniu (only division-IV uses both "j" and "i") // Type A
-#jwi = Consonant(Place.labio_velar, Manner.approximant, True, "w") >>>> NOTE: needs to be solved in transcriber
-#ji = Consonant(Place.palatal, Manner.approximant, False, "j")
+## option 1: since chongniu-distinction is only a graphic device in Baxter --> same medials as above
+## option 2: slight fricative medial -ʑ- instead of simple -j- 
 
-## since chongniu-distinction is only a graphic device in Baxter --> same medials as above
-## alternative explanation of chongniu-4: slight fricative medial -ʑ- instead of simple -j- 
-
+# jw --> two separate medials; alternatively, could be implemented as /jʷ/
+# jwi = Consonant(Place.labio_velar, Manner.approximant, True, "w") >>>> NOTE: /jwi/--> /jiw/ needs to be solved in transcriber
+ji = Consonant(Place.palatal, Manner.fricative, True, "ʑ")
 
 ##may need BasePhonologicalRule to define medials & vowels acc. to Pan and Zhang 2015: 88-89; see esp. vowel chart and Table 6.4 on p. 88. Baxter's notation marks most of these (but "j" + "a" == "jɑ"). 
 
-##double-check whether to include BasePhonologicalRule to define palatal + "j" cases, like 車 "tsyh" + "jae" == "tsyhae" (in Baxter's notation) [dropped "j" in notation only?]
 
 MEDIALS = set(
     [
         j,
         w,
+        ji,
+        #jw,
+        #jwi,
     ]
 )
+
+## Note: should/could MEDIALS be implemented through PositionedPhoneme()?
 
 
 ### Phonemes
@@ -201,7 +209,8 @@ MEDIALS = set(
 P = set([PositionedPhoneme(i, syllable_initial=True) for i in [p, ph, b, m]])
 T = set([PositionedPhoneme(i, syllable_initial=True) for i in [t, th, d, n]])
 Tr = set([PositionedPhoneme(i, syllable_initial=True) for i in [tr, trh, dr, nr]])
-K = set([PositionedPhoneme(i, syllable_initial=True) for i in [k, kh, g, ng, ʔ, x, h]])
+K = set([PositionedPhoneme(i, syllable_initial=True) for i in [k, kh, g, ng]])
+X = set([PositionedPhoneme(i, syllable_initial=True) for i in [ʔ, x, h]])
 TS = set([PositionedPhoneme(i, syllable_initial=True) for i in [ts, tsh, dz, s, z]])
 TSr = set(
     [PositionedPhoneme(i, syllable_initial=True) for i in [tsr, tsrh, dzr, sr, zr]]
@@ -267,25 +276,55 @@ COMPLEX_INITIALS = set(
 
 INITIALS = SIMPLE_INITIALS | COMPLEX_INITIALS
 
+## Nuclei
+NUCLEI = VOWELS
+
 ## Codas
 #can consist of Zero coda, ng, m, n, j, or w
 
 # Zero coda
 ZERO_CODA = set(PositionedPhoneme(a, syllable_final=True), PositionedPhoneme())
 
+# Approximant coda
+APPROXIMANT_CODA = set([PositionedPhoneme(i, syllable_final=True),for i in [w, j]])
 # Palatal glide coda
-
+J_CODA = PositionedPhoneme(j, syllable_final=True)
 # Labial-velar glide coda
+W_CODA = PositionedPhoneme(w, syllable_final=True)
 
-# Labial coda
+# Labial-velar coda
+LABIALVELAR_CODA = set([PositionedPhoneme(i, syllable_final=True) for i in [wk, wng]])
 
-# Dental coda
+# Nasal coda
+NASAL_CODA = set([PositionedPhoneme(i, syllable_final=True) for i in [n, m, ng, wng]])
+# Labial nasal coda
+M_CODA = PositionedPhoneme(m, syllable_final=True)
+# Dental nasal coda
+N_CODA = PositionedPhoneme(n, syllable_final=True)
+# Velar nasal coda
+NG_CODA = set([PositionedPhoneme(i, syllable_final=True) for i in [ng, wng]])
 
-# Velar coda
+VELAR_CODA = set([PositionePhoneme(i, syllable_final=True) for in [k, wk]])
 
-NUCLEI = VOWELS
+CONSONANTAL_CODA = set(
+    [
+        PositionedPhoneme(i, syllable_final=True)
+        for i in [
+            w,
+            j,
+            n,
+            m,
+            ng,
+            wng,
+            k,
+            wk,
+        ]
+    ]
+)
 
-CODAS = set()
+
+CODAS = ZERO_CODA | CONSONANTAL_CODA
+
 
 
 ## Finals
@@ -322,6 +361,12 @@ In Baxter 1992, level (平) is  unmarked; rising (上) marked by final X; depart
 
 """
 MC syllables, expressed through individual Chinese characters, consist of the following:
-initial (I); medial (M); nucleus (N) [which consists of onglide (G) and vowel (V)]; and coda (C) or ending (E); as well as tone (T)
-Any syllable can hence be represented as I(M)(G)V(C)T [optional material in parentheses]
+initial (I); up to two medials (M){,2}; nucleus [consisting of a vowel (V)]; and coda (C); as well as tone (T)
+Any syllable can hence be represented as I(M)(M)V(C)T [optional material in parentheses]
 """
+# Note: by defining ZERO_CODA, syllable can be defined as ---> I(M)(M)VCT  
+
+## Syllabifier:
+## note: 1 character expresses one syllable
+
+#SYLLABLE = INITIAL + MEDIAL{,2} + NUCLEUS + CODA + TONE
